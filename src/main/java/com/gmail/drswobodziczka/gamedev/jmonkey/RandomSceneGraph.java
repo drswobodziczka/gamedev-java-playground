@@ -10,6 +10,9 @@ import com.jme3.scene.shape.Box;
 import com.jme3.scene.shape.Sphere;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Random;
+import java.util.stream.IntStream;
+
 import static com.jme3.math.ColorRGBA.randomColor;
 
 /**
@@ -17,10 +20,10 @@ import static com.jme3.math.ColorRGBA.randomColor;
  * You can rotate, translate, and scale objects by manipulating their parent nodes.
  * The Root Node is special: Only what is attached to the Root Node appears in the scene.
  */
-public class HelloSceneGraph extends SimpleApplication {
+public class RandomSceneGraph extends SimpleApplication {
 
     public static void main(String[] args) {
-        HelloSceneGraph app = new HelloSceneGraph();
+        RandomSceneGraph app = new RandomSceneGraph();
         app.start();
     }
 
@@ -28,18 +31,29 @@ public class HelloSceneGraph extends SimpleApplication {
     public void simpleInitApp() {
         Node pivot = new Node("pivot");
         rootNode.attachChild(pivot); // put this node in the scene
-        Geometry box = createBox(new Vector3f(1, -2, 1), randomColor());
-        Geometry sphere = createSphere(new Vector3f(1, 2, 1), randomColor());
-        pivot.attachChild(box);
-        pivot.attachChild(sphere);
-        pivot.rotate(.4f, .4f, 0f);
+        attachRandomWorldTo(pivot);
+        pivot.rotate(.4f, .4f, .4f);
+    }
 
-        Box mesh = new Box(Vector3f.ZERO, 1, 1, 1); // a cuboid default mesh
-        Geometry thing = new Geometry("thing", mesh);
-        Material mat = new Material(assetManager,
-                "Common/MatDefs/Misc/ShowNormals.j3md");
-        thing.setMaterial(mat);
-        rootNode.attachChild(thing);
+    private void attachRandomWorldTo(Node pivot) {
+        Random random = new Random();
+        IntStream.range(0, 1000)
+                .forEach((num) -> {
+                    if (random.nextBoolean()) {
+                        pivot.attachChild(createBox(randomVector(), randomColor()));
+                    } else {
+                        pivot.attachChild(createSphere(randomVector(), randomColor()));
+                    }
+                });
+    }
+
+    @NotNull
+    private Vector3f randomVector() {
+        Random random = new Random();
+        int x = random.nextInt(100) * (random.nextBoolean() ? 1 : -1);
+        int y = random.nextInt(100) * (random.nextBoolean() ? 1 : -1);
+        int z = random.nextInt(100) * (random.nextBoolean() ? 1 : -1);
+        return new Vector3f(x, y, z);
     }
 
     @NotNull
