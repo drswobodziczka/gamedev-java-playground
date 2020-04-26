@@ -4,6 +4,7 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.font.BitmapText;
 import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
+import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
@@ -58,5 +59,11 @@ public class HelloAssets extends SimpleApplication {
         DirectionalLight sun = new DirectionalLight();
         sun.setDirection(new Vector3f(-0.1f, -0.7f, -1.0f));
         rootNode.addLight(sun);
+
+        Spatial elephant = assetManager.loadModel("Models/Elephant/Elephant.mesh.xml");
+        elephant.scale(.15f);
+        elephant.move(new Vector3f(-2, 0, -15));
+        elephant.rotate(0, 180* FastMath.DEG_TO_RAD, 0);
+        rootNode.attachChild(elephant);
     }
 }
