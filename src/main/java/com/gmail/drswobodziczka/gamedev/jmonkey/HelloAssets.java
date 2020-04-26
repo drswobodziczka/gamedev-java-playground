@@ -65,5 +65,8 @@ public class HelloAssets extends SimpleApplication {
         elephant.move(new Vector3f(-2, 0, -15));
         elephant.rotate(0, 180* FastMath.DEG_TO_RAD, 0);
         rootNode.attachChild(elephant);
+
+        Spatial scene = assetManager.loadModel("Scenes/ManyLights/Main.scene");
+        rootNode.attachChild(scene);
     }
 }
