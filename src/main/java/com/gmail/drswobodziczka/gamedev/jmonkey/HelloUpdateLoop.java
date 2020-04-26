@@ -6,6 +6,8 @@ import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Spatial;
 
+import java.util.Random;
+
 public class HelloUpdateLoop extends SimpleApplication {
 
     private Spatial elephant;
@@ -50,7 +52,9 @@ public class HelloUpdateLoop extends SimpleApplication {
     @Override
     public void simpleUpdate(float tpf) {
         // make the players rotate
-        ninja.rotate(0, 40 * tpf, 0);
-        elephant.rotate(0, 2 * tpf, 0);
+        ninja.rotate(0, 10 * tpf, 0);
+        ninja.move(new Vector3f(0.1f, 0f, -0.1f));
+        elephant.scale(new Random().nextBoolean() ? 0.9f : 1.1f);
+        elephant.rotate(0, -2 * tpf, 0);
     }
 }
