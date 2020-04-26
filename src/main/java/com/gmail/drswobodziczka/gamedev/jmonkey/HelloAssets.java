@@ -1,7 +1,6 @@
 package com.gmail.drswobodziczka.gamedev.jmonkey;
 
 import com.jme3.app.SimpleApplication;
-import com.jme3.asset.plugins.ClasspathLocator;
 import com.jme3.asset.plugins.FileLocator;
 import com.jme3.asset.plugins.ZipLocator;
 import com.jme3.font.BitmapText;
@@ -15,8 +14,7 @@ import com.jme3.scene.shape.Box;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Sample 3 - how to load an OBJ model, and OgreXML model,
- * a material/texture, or text.
+ * Ninja and elephant in the town!
  */
 public class HelloAssets extends SimpleApplication {
 
@@ -33,7 +31,7 @@ public class HelloAssets extends SimpleApplication {
         rootNode.attachChild(teapot);
 
         // Create a wall with a simple texture from test_data
-        Spatial wall = createWallWIthTexture();
+        Spatial wall = createWallWithTexture();
         rootNode.attachChild(wall);
 
         // Display a line of text with a default font
@@ -108,7 +106,7 @@ public class HelloAssets extends SimpleApplication {
     }
 
     @NotNull
-    private Spatial createWallWIthTexture() {
+    private Spatial createWallWithTexture() {
         Box box = new Box(2.5f, 2.5f, 1.0f);
         Spatial wall = new Geometry("Box", box);
         Material mat_brick = new Material(
