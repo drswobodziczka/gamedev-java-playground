@@ -1,6 +1,8 @@
 package com.gmail.drswobodziczka.gamedev.jmonkey;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.asset.plugins.ClasspathLocator;
+import com.jme3.asset.plugins.FileLocator;
 import com.jme3.asset.plugins.ZipLocator;
 import com.jme3.font.BitmapText;
 import com.jme3.light.DirectionalLight;
@@ -51,12 +53,30 @@ public class HelloAssets extends SimpleApplication {
 //        Spatial scene = assetManager.loadModel("Scenes/ManyLights/Main.scene");
 //        rootNode.attachChild(scene);
 
-        // load scene using assert menager and zip locator
+        // load scene
+        Spatial gameLevel = loadSceneFromAssets();
+        rootNode.attachChild(gameLevel);
+    }
+
+    @NotNull
+    private Spatial loadSceneFromZip() {
         assetManager.registerLocator("town.zip", ZipLocator.class);
         Spatial gameLevel = assetManager.loadModel("main.scene");
         gameLevel.setLocalTranslation(0, -5.2f, 0);
         gameLevel.setLocalScale(2);
-        rootNode.attachChild(gameLevel);
+        return gameLevel;
+    }
+
+    /*
+    * NOTE: this would work out-of he box in SDK, as myproject/assets dir would be on classpath.
+    * Here in gradle project we workaround this issue with FileLocator.
+    * */
+    private Spatial loadSceneFromAssets() {
+        assetManager.registerLocator("assets", FileLocator.class);
+        Spatial gameLevel = assetManager.loadModel("/Scenes/town/main.scene");
+        gameLevel.setLocalTranslation(0, -5.2f, 0);
+        gameLevel.setLocalScale(2);
+        return gameLevel;
     }
 
     @NotNull
