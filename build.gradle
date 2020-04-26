@@ -9,17 +9,19 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
+    maven { url "http://dl.bintray.com/jmonkeyengine/org.jmonkeyengine" }
     jcenter()
     mavenCentral()
-    maven { url "http://dl.bintray.com/jmonkeyengine/org.jmonkeyengine" }
 }
 
+def jme3 = [v:'3.2.0-stable', g:'org.jmonkeyengine']
+
 dependencies {
-    compile group: 'org.jmonkeyengine', name: 'jme3-core', version: '3.3.0-stable'
-    compile group: 'org.jmonkeyengine', name: 'jme3-desktop', version: '3.2.2-stable'
-    compile group: 'org.jmonkeyengine', name: 'jme3-lwjgl', version: '3.2.2-stable'
-    compile group: 'org.jmonkeyengine', name: 'jme3-testdata', version: '3.3.0-stable'
-    compile group: 'org.jmonkeyengine', name: 'jme3-examples', version: '3.3.0-stable'
+    compile group: "${jme3.g}", name: 'jme3-core', version: "${jme3.v}"
+    compile group: "${jme3.g}", name: 'jme3-desktop', version: "${jme3.v}"
+    compile group: "${jme3.g}", name: 'jme3-lwjgl', version: "${jme3.v}"
+    compile group: "${jme3.g}", name: 'jme3-testdata', version: "3.3.0-stable"
+    compile group: "${jme3.g}", name: 'jme3-examples', version: "3.3.0-stable"
 }
 
 intellij {
